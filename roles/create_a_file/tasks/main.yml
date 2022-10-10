@@ -1,0 +1,9 @@
+---
+
+- name: file
+  template:
+    src: templates/lesson2.txt
+    dest: "/home/{{ new_account }}/{{ site_folder }}/lesson2.txt"
+    mode: 0775
+    owner: "{{ new_account }}"
+    group: "{{ new_account }}"

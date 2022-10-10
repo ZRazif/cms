@@ -1,0 +1,19 @@
+---
+
+- name: create a user and give him rights
+  user:
+    name: "{{ new_account }}"
+    password: "{{ new_account_password }}"
+    shell: /bin/bash
+    groups: wheel
+    state: present
+    append: yes
+    create_home: yes
+
+- name: create a key for the user
+  user:
+    name: "{{ new_account }}"
+    generate_ssh_key: yes
+    ssh_key_bits: 2048
+    ssh_key_comment: "{{ new_account }}"
+    ssh_key_file: .ssh/id_rsa

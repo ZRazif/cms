@@ -1,0 +1,10 @@
+
+ansible_user: ans
+ansible_password: Qwe123
+ansible_become_password: Qwe123
+ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
+
+new_account: lesson2
+new_account_password: "{{ 'Qaz@123' | password_hash('sha256', 'mysecretsalt') }}"
+
+site_folder: lesson2

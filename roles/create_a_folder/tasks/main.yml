@@ -1,0 +1,9 @@
+---
+
+- name: "{{ site_folder }}"
+  file:
+    path: "/home/{{ new_account }}/{{ site_folder }}"
+    state: directory
+    mode: 0775
+    owner: "{{ new_account }}"
+    group: "{{ new_account }}"

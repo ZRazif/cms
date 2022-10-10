@@ -1,0 +1,9 @@
+---
+- name: download file
+  get_url:
+    url: https://raw.githubusercontent.com/ansible/ansible/devel/README.rst
+    dest: "/home/{{ new_account }}/{{ site_folder }}/README.rst"
+    mode: 0775
+    owner: "{{ new_account }}"
+    group: "{{ new_account }}"
+    

@@ -1,0 +1,9 @@
+---
+- name: lesson2
+  hosts: "{{ env_type }}"
+  become: yes
+  roles:
+    - user
+    - create_a_folder
+    - create_a_file
+    - download_file
