@@ -4,7 +4,12 @@ ansible_password: Qwe123
 ansible_become_password: Qwe123
 ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
 
-new_account: lesson2
-new_account_password: "{{ 'Qaz@123' | password_hash('sha256', 'mysecretsalt') }}"
+new_account:
+  - login: ask1
+    pass: "{{ 'Qaz@123' | password_hash('sha256', 'mysecretsalt') }}"
+  - login: ask2
+    pass: "{{ 'Qwe@147' | password_hash('sha256', 'mysecretsalt') }}"
 
-site_folder: lesson2
+site_folder: lesson5
+
+site_file: lesson5.txt

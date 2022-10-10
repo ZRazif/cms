@@ -2,8 +2,9 @@
 
 - name: file
   template:
-    src: templates/lesson2.txt
-    dest: "/home/{{ new_account }}/{{ site_folder }}/lesson2.txt"
+    src: templates/lesson.txt
+    dest: "/tmp/{{ site_folder }}/{{ site_file }}"
     mode: 0775
-    owner: "{{ new_account }}"
-    group: "{{ new_account }}"
+    owner: ask1
+    group: ask2
+  when: (site_file is defined) or (site_file|length > 0)
