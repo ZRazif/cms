@@ -1,0 +1,75 @@
+---
+- name: install the remi repository
+  yum:
+    name:
+      - "{{ php_repo }}"
+    state: latest
+
+- name: install php
+  yum:
+    name:
+      - php
+    state: latest
+    enablerepo: "{{ php_version }}"
+
+
+
+- name: copy www.conf
+  template:
+    src: templates/www.conf
+    dest: /etc/php-fpm.d/www.conf
+    mode: 0644
+    owner: root
+    group: root
+    backup: yes
+
+- name: files opcache
+  file:
+    path: /var/lib/php/opcache
+    owner: root
+    group: nginx
+    recurse: yes
+
+- name: files session
+  file:
+    path: /var/lib/php/session
+    owner: root
+    group: nginx
+    recurse: yes
+
+- name: files wsdlcache
+  file:
+    path: /var/lib/php/wsdlcache
+    owner: root
+    group: nginx
+    recurse: yes
+
+
+
+- name: copy php.ini
+  template:
+    src: templates/php.ini
+    dest: /etc/php.ini
+    mode: 0644
+    owner: root
+    group: root
+    backup: yes
+
+
+
+- name: copy 10-opcache.ini
+  template:
+    src: templates/10-opcache.ini
+    dest: /etc/php.d/10-opcache.ini
+    mode: 0644
+    owner: root
+    group: root
+    backup: yes
+
+
+
+- name: turn on php-fpm
+  service:
+    name: php-fpm
+    state: started
+    enabled: yes

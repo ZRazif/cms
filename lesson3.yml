@@ -1,5 +1,5 @@
 ---
-- name: lesson2
+- name: lesson3
   hosts: "{{ env_type }}"
   become: yes
   roles:
