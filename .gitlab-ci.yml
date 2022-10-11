@@ -2,7 +2,21 @@ variables:
   GIT_STRATEGY: fetch
 
 stages:
+  - external_roles
   - lesson2
+
+external_roles:
+  stage: external_roles
+  script:
+    - ansible-galaxy install geerlingguy.nginx geerlingguy.mysql geerlingguy.php
+    - ansible-playbook -i hosts -e "env_type=recipient" -e "way_type=$CI_PROJECT_DIR" lesson2.yml --ask-pass --ask-become-pass
+  tags:
+    - ansible.alamics.ru
+  environment:
+    name: recipient
+  only:
+    - branches
+  when: manual
 
 lesson2:
   stage: lesson2
