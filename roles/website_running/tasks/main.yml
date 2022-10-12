@@ -1,0 +1,5 @@
+---
+
+- name: website running
+  uri:
+    url: "http://{{ site_name }}"

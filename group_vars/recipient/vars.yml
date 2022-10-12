@@ -9,40 +9,13 @@ new_account_password: "{{ 'Qaz@123' | password_hash('sha256', 'mysecretsalt') }}
 
 site_folder: lesson3
 
-###Старый пароль root базы данных
-mariadb_root_password: ''
+site_name: "192.168.57.128"
 
-###Новый пароль root базы данных
-mariadb_root_new_password: Qwer1234
 
-###Версия базы данных
-mariadb_version: mariadb-10.5
 
-###Версия PHP
-php_repo: http://rpms.remirepo.net/enterprise/remi-release-7.rpm
-php_version: remi-php74
+nginx_worker_processes: auto
 
-###www.conf отличие от чистого
-php_user: nginx
-php_group: nginx
-php_listen: /var/run/php-fpm/php-fpm.sock
-php_listen_owner: nginx
-php_listen_group: nginx
-php_listen_mode: '0660'
+nginx_port: 80
 
-###php.ini отличие от чистого
-php_short_open_tag: 'On'
-php_max_input_vars: 10000
-php_html_errors: 'On'
-php_upload_max_filesize: 8M
-
-###10-opcache.ini отличие от чистого
-php_opcache_memory_consumption: 229
-php_opcache_interned_strings_buffer: 57
-php_opcache_max_accelerated_files: 100000
-php_opcache_max_wasted_percentage: 1
-php_opcache_validate_timestamps: 1
-php_opcache_revalidate_freq: 0
-php_opcache_fast_shutdown: 1
-php_opcache_save_comments: 1
-php_opcache_load_comments: 1
+nginx_upstreams_name: myapp1
+nginx_upstreams_strategy: "ip_hash"

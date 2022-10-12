@@ -1,0 +1,4 @@
+ansible_user: deploy
+ansible_password: QFLMHy2FN8
+ansible_become_password: QFLMHy2FN8
+ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
