@@ -3,7 +3,11 @@
   hosts: "{{ env_type }}"
   become: yes
   roles:
-    - user
-    - create_a_folder
-    - create_a_file
-    - download_file
+    - packages
+    - firewalld
+    - nginx
+#    - geerlingguy.nginx
+    - php
+#    - geerlingguy.php
+    - geerlingguy.mysql
+    - wordpress

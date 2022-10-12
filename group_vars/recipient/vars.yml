@@ -9,14 +9,7 @@ new_account_password: "{{ 'Qaz@123' | password_hash('sha256', 'mysecretsalt') }}
 
 site_folder: lesson3
 
-###Старый пароль root базы данных
-mariadb_root_password: ''
-
-###Новый пароль root базы данных
-mariadb_root_new_password: Qwer1234
-
-###Версия базы данных
-mariadb_version: mariadb-10.5
+site_name: "192.168.57.128"
 
 ###Версия PHP
 php_repo: http://rpms.remirepo.net/enterprise/remi-release-7.rpm
@@ -32,17 +25,91 @@ php_listen_mode: '0660'
 
 ###php.ini отличие от чистого
 php_short_open_tag: 'On'
-php_max_input_vars: 10000
 php_html_errors: 'On'
-php_upload_max_filesize: 8M
+php_upload_max_filesize: 64M
+php_post_max_size: 128M
+php_memory_limit: 256M
+php_max_execution_time: 600
+php_max_input_vars: 5000
+php_max_input_time: 400
 
-###10-opcache.ini отличие от чистого
-php_opcache_memory_consumption: 229
-php_opcache_interned_strings_buffer: 57
-php_opcache_max_accelerated_files: 100000
-php_opcache_max_wasted_percentage: 1
-php_opcache_validate_timestamps: 1
-php_opcache_revalidate_freq: 0
-php_opcache_fast_shutdown: 1
-php_opcache_save_comments: 1
-php_opcache_load_comments: 1
+
+
+server_name: "192.168.57.128" # тут ваш домен
+mysql_db: "wordpress"
+mysql_user: "wordpress"
+mysql_password: "WordpreSS0!"
+
+#nginx_yum_repo_enabled: false
+
+#nginx_vhosts:
+#  - listen: "80"
+#    server_name: "{{ server_name }} www.{{ server_name }}"
+#    return: "301 https://{{ server_name }}$request_uri"
+#    filename: "{{ server_name }}.80.conf"
+
+#  - listen: "443 ssl http2"
+#    server_name: "{{ server_name }}"
+#    root: "/var/www/{{ server_name}}/wordpress"
+#    index: "index.php index.html index.htm"
+#    error_page: "500 502 503 504 /50x.html"
+#    access_log: "/var/log/nginx/{{ server_name }}.access.log main"
+#    error_log: ""
+#    state: "present"
+#    template: "{{ nginx_vhost_template }}"
+#    filename: "{{ server_name }}.conf"
+#    extra_parameters: |
+#      location ~ \.php$ {
+#          fastcgi_split_path_info ^(.+\.php)(/.+)$;
+#          fastcgi_pass unix:/var/run/php/php-fpm.sock;
+#          fastcgi_index index.php;
+#          fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+#          include fastcgi_params;
+#      }
+#      ssl_certificate /etc/letsencrypt/live/{{ server_name }}/fullchain.pem;
+#      ssl_certificate_key /etc/letsencrypt/live/{{ server_name }}/privkey.pem;
+#      ssl_protocols TLSv1.1 TLSv1.2;
+#      ssl_ciphers HIGH:!aNULL:!MD5;
+
+#php_enable_php_fpm: true
+
+#php_fpm_pools:
+#  - pool_name: www
+#    pool_listen: "/var/run/php/php-fpm.sock"
+
+
+#php_fpm_pool_user: "nginx"
+#php_fpm_pool_group: "nginx"
+
+#php_memory_limit: "128M"
+#php_max_execution_time: "90"
+#php_upload_max_filesize: "256M"
+#php_webserver_daemon: "nginx"
+#php_packages:
+#  - php
+#  - php-cli
+#  - php-common
+#  - php-gd
+#  - php-mbstring
+#  - php-pdo
+#  - php-xml
+#  - php-curl
+#  - php-gd
+#  - php-mbstring
+#  - php-xml
+#  - php-xmlrpc
+#  - php-soap
+#  - php-intl
+#  - php-zip
+#  - php-mysql
+
+mysql_databases:
+  - name: "{{ mysql_db }}"
+    encoding: utf8
+    collation: utf8_general_ci
+
+mysql_users:
+  - name: "{{ mysql_user }}"
+    host: "%"
+    password: "{{ mysql_password }}"
+    priv: "wordpress.*:ALL"
