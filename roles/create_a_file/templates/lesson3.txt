@@ -1,8 +1,0 @@
-Сделано под учеткой:
-Логин: {{ ansible_user }}
-Пароль: {{ ansible_password }}
-
-Сделана учетка:
-Логин: {{ new_account }}
-
-Сделана папка: {{ site_folder }}

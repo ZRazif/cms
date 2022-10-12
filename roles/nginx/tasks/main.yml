@@ -9,8 +9,8 @@
     src: files/nginx.conf
     dest: /etc/nginx/nginx.conf
     mode: 0644
-    owner: "{{ new_account }}"
-    group: "{{ new_account }}"
+    owner: root
+    group: root
     backup: yes
 
 - name: turn on Nginx
@@ -18,3 +18,16 @@
     name: nginx
     state: started
     enabled: yes
+
+- name: site conf nginx
+  template:
+    src: templates/site.conf
+    dest: "/etc/nginx/conf.d/{{ site_name }}.conf"
+    mode: 0644
+    owner: root
+    group: root
+
+- name: switch nginx
+  service:
+    name: nginx
+    state: reloaded

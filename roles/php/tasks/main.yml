@@ -1,5 +1,5 @@
 ---
-- name: install the remi repository
+- name: install the remi repository for centOS 7
   yum:
     name:
       - "{{ php_repo }}"
@@ -11,6 +11,25 @@
       - php
     state: latest
     enablerepo: "{{ php_version }}"
+
+- name: install modules php
+  yum:
+    name:
+      - php-fpm
+      - php-cli
+      - php-common
+      - php-gd
+      - php-mbstring
+      - php-pdo
+      - php-xml
+      - php-curl
+      - php-xmlrpc
+      - php-soap
+      - php-intl
+      - php-zip
+      - php-mysql
+    state: latest
+    enablerepo: "epel,remi,{{ php_version }}"
 
 
 
@@ -50,17 +69,6 @@
   template:
     src: templates/php.ini
     dest: /etc/php.ini
-    mode: 0644
-    owner: root
-    group: root
-    backup: yes
-
-
-
-- name: copy 10-opcache.ini
-  template:
-    src: templates/10-opcache.ini
-    dest: /etc/php.d/10-opcache.ini
     mode: 0644
     owner: root
     group: root

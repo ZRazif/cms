@@ -1,3 +1,6 @@
 
 [recipient]
-host_rp ansible_host=192.168.57.115
+host_rp ansible_host=192.168.57.128
+
+[razif]
+host172 ansible_host=192.168.57.172

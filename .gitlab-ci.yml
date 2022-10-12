@@ -1,27 +1,27 @@
+
 variables:
   GIT_STRATEGY: fetch
 
 stages:
   - external_roles
-  - lesson2
+  - lesson4
 
 external_roles:
   stage: external_roles
   script:
-    - ansible-galaxy install geerlingguy.nginx geerlingguy.mysql geerlingguy.php
-    - ansible-playbook -i hosts -e "env_type=recipient" -e "way_type=$CI_PROJECT_DIR" lesson2.yml --ask-pass --ask-become-pass
+    - ansible-playbook -v -i hosts -e "env_type=razif" -e "way_type=$CI_PROJECT_DIR" external_roles.yml --ask-pass --ask-become-pass
   tags:
     - ansible.alamics.ru
   environment:
-    name: recipient
+    name: razif
   only:
     - branches
   when: manual
 
-lesson2:
-  stage: lesson2
+lesson4:
+  stage: lesson4
   script:
-    - ansible-playbook -i hosts -e "env_type=recipient" -e "way_type=$CI_PROJECT_DIR" lesson2.yml --ask-pass --ask-become-pass
+    - ansible-playbook -vvv -i hosts -e "env_type=recipient" -e "way_type=$CI_PROJECT_DIR" lesson4.yml --ask-pass --ask-become-pass --tags wordpress --vault-password-file .vault.pass
   tags:
     - ansible.alamics.ru
   environment:
