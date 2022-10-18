@@ -1,0 +1,29 @@
+---
+- name: install firewalld
+  yum:
+    name:
+      - firewalld
+    state: latest
+
+- name: turn on firewalld
+  service:
+    name: firewalld
+    state: started
+    enabled: yes
+
+- name: open a port 80
+  firewalld:
+    service: http
+    permanent: yes
+    state: enabled
+
+- name: open a port 443
+  firewalld:
+    service: https
+    permanent: yes
+    state: enabled
+
+- name: restart firewalld
+  service:
+    name: firewalld
+    state: restarted

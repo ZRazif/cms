@@ -1,0 +1,9 @@
+---
+
+- name: external roles
+  hosts: "{{ env_type }}"
+  become: yes
+
+  tasks:
+  - name: external
+    command: ansible-galaxy install --roles-path /home/razif/work/cms/external_roles -r /home/razif/work/cms/requirements.yml

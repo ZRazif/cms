@@ -1,0 +1,13 @@
+---
+- name: lesson4
+  hosts: "{{ env_type }}"
+  become: yes
+  roles:
+    - { role: packages, tags: [wordpress] }
+    - { role: firewalld, tags: [wordpress] }
+    - { role: nginx, tags: [wordpress] }
+    - geerlingguy.nginx
+    - { role: php, tags: [wordpress] }
+    - geerlingguy.php
+    - { role: geerlingguy.mysql, tags: [wordpress] }
+    - { role: wordpress, tags: [wordpress] }

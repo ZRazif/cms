@@ -1,0 +1,33 @@
+---
+- name: install Nginx
+  yum:
+    name: nginx
+    state: latest
+
+- name: nginx.conf copy in nginx
+  copy:
+    src: files/nginx.conf
+    dest: /etc/nginx/nginx.conf
+    mode: 0644
+    owner: root
+    group: root
+    backup: yes
+
+- name: turn on Nginx
+  service:
+    name: nginx
+    state: started
+    enabled: yes
+
+- name: site conf nginx
+  template:
+    src: templates/site.conf
+    dest: "/etc/nginx/conf.d/{{ site_name }}.conf"
+    mode: 0644
+    owner: root
+    group: root
+
+- name: switch nginx
+  service:
+    name: nginx
+    state: reloaded
