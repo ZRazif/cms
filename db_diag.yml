@@ -1,0 +1,4 @@
+---
+
+- name: check db status
+  command: ping -c 1 8.8.8.8

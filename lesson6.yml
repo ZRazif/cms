@@ -1,9 +1,0 @@
----
-- name: lesson6
-  hosts: "{{ env_type }}"
-  become: yes
-  roles:
-    - packages
-    - firewalld
-    - nginx
-    - website_running

@@ -12,4 +12,5 @@
       - mc
       - tar
       - unzip
+      - python3
     state: latest

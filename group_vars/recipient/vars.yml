@@ -4,14 +4,23 @@ ansible_password: Qwe123
 ansible_become_password: Qwe123
 ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
 
-new_account: lesson3
+new_account: lesson
 new_account_password: "{{ 'Qaz@123' | password_hash('sha256', 'mysecretsalt') }}"
 
-site_folder: lesson3
+site_folder: lesson
 
 site_name: "192.168.57.128"
 
+mariadb_root_password: ''
 
+mariadb_root_new_password: '}pvYeiGe~88A'
+
+mariadb_version: mariadb-10.5
+
+b_db_u_host: localhost
+b_db_username: lesson
+b_db_database: lesson
+b_db_password: '7Y9cgQJXdh#d'
 
 nginx_worker_processes: auto
 

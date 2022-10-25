@@ -1,0 +1,14 @@
+---
+- name: сheck status of the nginx
+  shell: 'sudo systemctl status nginx'
+  register: nginx_command_output
+
+- debug:
+    var: nginx_command_output.stdout_lines
+
+- name: сheck status of the mariadb
+  shell: 'sudo systemctl status mariadb'
+  register: mariadb_command_output
+
+- debug:
+    var: mariadb_command_output.stdout_lines

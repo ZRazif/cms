@@ -1,0 +1,18 @@
+---
+
+- name: exec health request
+  uri:
+    url: http://localhost/health
+    return_content: yes
+    status_code: 200
+  register: file_content
+
+- set_fact:
+    nginx_health: "{{file_content.content | from_json }}"
+
+- name: print nginx_health
+  debug:
+    var: nginx_health
+
+- include_tasks: db_diag.yml
+  when: nginx_health.db | default(false) | bool

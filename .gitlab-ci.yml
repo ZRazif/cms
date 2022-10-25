@@ -3,13 +3,13 @@ variables:
   GIT_STRATEGY: fetch
 
 stages:
-  - lesson6
+  - lesson7
 
 
-lesson6:
-  stage: lesson6
+lesson7:
+  stage: lesson7
   script:
-    - ansible-playbook -v -i hosts -e "env_type=recipient" -e "way_type=$CI_PROJECT_DIR" lesson6.yml --ask-pass --ask-become-pass
+    - ansible-playbook -v -i hosts -e "env_type=recipient" -e "way_type=$CI_PROJECT_DIR" lesson7.yml --ask-pass --ask-become-pass
   tags:
     - ansible.alamics.ru
   environment:

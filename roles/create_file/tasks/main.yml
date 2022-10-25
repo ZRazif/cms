@@ -1,0 +1,24 @@
+---
+
+- name: stop Nginx
+  service:
+    name: nginx
+    state: stopped
+
+- name: start file hosting
+  shell: 'cd /home/ans | sudo nohup python3 -m http.server 80 &'
+
+- name: create a file
+  copy:
+    content: '{ "db": true, "redis": false, "timeout": 30 }'
+    dest: /home/ans/health
+
+- name: get information on file
+  uri:
+    url: http://localhost/health
+    return_content: yes
+  register: file_content
+
+- name: show file content
+  debug:
+    var: file_content.content

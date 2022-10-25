@@ -1,0 +1,13 @@
+---
+- name: lesson7
+  hosts: "{{ env_type }}"
+  become: yes
+  roles:
+    - packages
+    - firewalld
+    - nginx
+    - mariadb
+    - database
+    - enabled
+    - create_file
+    - check_connection

@@ -1,0 +1,19 @@
+---
+- name: "new database {{ b_db_database }}"
+  mysql_db:
+    login_user: root
+    login_password: "{{ mariadb_root_new_password }}"
+    name: "{{ b_db_database }}"
+    collation: utf8_unicode_ci
+    encoding: utf8
+    state: present
+
+- name: "new users {{ b_db_username }}"
+  mysql_user:
+    login_user: root
+    login_password: "{{ mariadb_root_new_password }}"
+    name: "{{ b_db_username }}"
+    host: "{{ b_db_u_host }}"
+    password: "{{ b_db_password }}"
+    priv: "{{ b_db_database }}.*:ALL"
+    state: present
